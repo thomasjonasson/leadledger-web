@@ -6,12 +6,12 @@
     <title>LeadLedger</title>
     <meta
       name="description"
-      content="LeadLedger ger nya kunder en specificerad offert från er redovisningsbyrå inom sekunder, räknad på er egen prislista. Det självklara alternativet till QuickLead för redovisningsbyråer."
+      content="LeadLedger ger nya kunder en specificerad offert från er redovisningsbyrå inom sekunder, räknad på er egen prislista. Ni godkänner i mobilappen och LeadLedger följer upp automatiskt."
     />
     <meta property="og:title" content="LeadLedger – offerter till nya kunder inom sekunder" />
     <meta
       property="og:description"
-      content="Det självklara alternativet till QuickLead för svenska redovisningsbyråer."
+      content="AI-offerter för svenska redovisningsbyråer, räknade på er egen prislista."
     />
     <meta property="og:url" content="https://leadledger.se/" />
     <meta property="og:locale" content="sv_SE" />
@@ -337,44 +337,12 @@
         margin-top: 12px;
       }
 
-      /* QuickLead-jämförelse */
-      .versus {
-        display: grid;
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 24px;
-      }
-      .versus .card {
-        padding: 28px;
-        display: flex;
-        flex-direction: column;
-        gap: 14px;
-      }
-      .versus .ours {
-        border-color: var(--accent);
-        box-shadow: 0 0 0 1px var(--accent);
-      }
-      .versus h3 {
-        font-size: 19px;
-        font-weight: 600;
-      }
-      .versus .theirs h3 {
-        color: var(--muted);
-      }
-      .versus .ours h3 {
-        color: var(--accent);
-      }
       .checks {
         list-style: none;
         margin: 0;
         padding: 0;
         display: grid;
         gap: 10px;
-      }
-      .theirs {
-        background: #fafbf9;
-      }
-      .theirs .checks {
-        color: var(--muted);
       }
       .ledger {
         overflow-x: auto;
@@ -410,6 +378,420 @@
       .footnote {
         font-size: 13px;
         color: var(--faint);
+      }
+
+
+      /* Flödet i fyra steg */
+      .flow {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 24px;
+      }
+      .flow > li {
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+      }
+      .viz {
+        background: var(--bg);
+        border-bottom: 1px solid var(--line);
+        height: 280px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 24px;
+        overflow: hidden;
+      }
+      .viz.dark {
+        background: #26342d;
+      }
+      .mini {
+        width: 100%;
+        max-width: 360px;
+        background: var(--surface);
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        box-shadow: 0 1px 2px rgba(21, 32, 27, 0.06);
+        padding: 16px;
+        font-size: 13px;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+      .mini.tight {
+        gap: 0;
+        padding-block: 14px;
+      }
+      .mini .ln {
+        padding-block: 5px;
+        font-size: 12.5px;
+      }
+      .progress {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 4px;
+      }
+      .progress span {
+        height: 4px;
+        border-radius: 2px;
+        background: var(--line);
+      }
+      .progress .on {
+        background: var(--client);
+      }
+      .ml {
+        font-size: 11px;
+        font-weight: 600;
+        color: #3d4842;
+        margin-bottom: 4px;
+      }
+      .seg {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        border: 1px solid #cdd3cc;
+        border-radius: 6px;
+        overflow: hidden;
+        font-size: 12px;
+        font-weight: 600;
+        text-align: center;
+      }
+      .seg span {
+        padding-block: 6px;
+        border-left: 1px solid #cdd3cc;
+      }
+      .seg span:first-child {
+        border-left: 0;
+      }
+      .seg .on {
+        background: var(--client);
+        color: #fff;
+      }
+      .two {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px;
+      }
+      .mf {
+        height: 32px;
+        border: 1px solid #cdd3cc;
+        border-radius: 6px;
+        display: flex;
+        align-items: center;
+        padding-inline: 10px;
+      }
+      .mbtn {
+        height: 36px;
+        border-radius: 6px;
+        background: var(--client);
+        color: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 600;
+      }
+      .mhead {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 8px;
+        margin-bottom: 8px;
+      }
+      .pill {
+        display: inline-flex;
+        align-items: center;
+        height: 22px;
+        padding-inline: 8px;
+        border-radius: 6px;
+        font-size: 12px;
+        font-weight: 600;
+        background: var(--accent-soft);
+        color: var(--accent);
+        white-space: nowrap;
+      }
+      .intro {
+        font-size: 12px;
+        color: var(--muted);
+        background: #fafbf9;
+        border: 1px solid var(--line-soft);
+        border-radius: 6px;
+        padding: 8px 10px;
+        margin-bottom: 6px;
+      }
+      .phone {
+        width: 100%;
+        max-width: 330px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+      .notis {
+        background: rgba(250, 251, 249, 0.96);
+        border-radius: 16px;
+        padding: 12px 14px;
+        display: flex;
+        gap: 10px;
+        font-size: 13px;
+      }
+      .notis svg {
+        flex-shrink: 0;
+      }
+      .notis > div {
+        flex-grow: 1;
+      }
+      .ntop {
+        display: flex;
+        justify-content: space-between;
+        font-size: 11px;
+        color: var(--muted);
+        font-weight: 600;
+        letter-spacing: 0.04em;
+      }
+      .pbtns {
+        display: grid;
+        grid-template-columns: 1fr 1.6fr;
+        gap: 8px;
+        font-size: 13px;
+        font-weight: 600;
+      }
+      .pbtns span {
+        height: 40px;
+        border-radius: 10px;
+        background: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .pbtns .go {
+        background: var(--accent);
+        color: #fff;
+      }
+      .tl {
+        list-style: none;
+        margin: 0;
+        gap: 0;
+      }
+      .tl li {
+        display: grid;
+        grid-template-columns: 14px 1fr;
+        gap: 12px;
+        padding-bottom: 14px;
+        position: relative;
+      }
+      .tl li:last-child {
+        padding-bottom: 0;
+      }
+      .tl li:not(:last-child)::before {
+        content: "";
+        position: absolute;
+        left: 5px;
+        top: 16px;
+        bottom: 0;
+        width: 2px;
+        background: var(--line);
+      }
+      .tl .d {
+        width: 12px;
+        height: 12px;
+        border-radius: 6px;
+        margin-top: 4px;
+        background: var(--accent);
+        position: relative;
+      }
+      .tl .d.wait {
+        background: #b98a2e;
+      }
+      .tl .d.next {
+        background: #fff;
+        border: 2px solid #cdd3cc;
+      }
+      .tl .tm {
+        font-size: 12px;
+        color: var(--faint);
+      }
+      .tl b {
+        color: #7a4f00;
+        font-weight: 600;
+      }
+      .tl .dim {
+        color: var(--muted);
+      }
+      .stxt {
+        padding: 24px 28px 28px;
+        display: flex;
+        gap: 14px;
+        align-items: flex-start;
+      }
+      .stxt h3 {
+        font-size: 20px;
+        font-weight: 600;
+        letter-spacing: -0.01em;
+        line-height: 1.3;
+      }
+      .stxt p {
+        margin-top: 6px;
+        color: var(--muted);
+      }
+      .sn {
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        background: var(--accent);
+        color: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 14px;
+        font-weight: 700;
+        flex-shrink: 0;
+      }
+
+      /* Prismodulen */
+      .split {
+        display: grid;
+        grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+        gap: 56px;
+        align-items: start;
+      }
+      .ptypes {
+        margin: 0;
+        border-top: 1px solid var(--line);
+      }
+      .ptypes > div {
+        display: grid;
+        grid-template-columns: 140px 1fr;
+        gap: 16px;
+        padding-block: 12px;
+        border-bottom: 1px solid var(--line);
+        font-size: 15px;
+      }
+      .ptypes dt {
+        font-weight: 600;
+      }
+      .ptypes dd {
+        margin: 0;
+        color: var(--muted);
+      }
+      .catalog {
+        overflow: hidden;
+      }
+      .cat-head {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 12px;
+        padding: 16px 20px;
+        border-bottom: 1px solid var(--line);
+        font-size: 17px;
+      }
+      .catalog .ledger table {
+        min-width: 480px;
+        font-size: 14px;
+      }
+      .catalog .ledger th,
+      .catalog .ledger td {
+        padding: 10px 20px;
+      }
+      .catalog .ledger thead th {
+        background: #fafbf9;
+      }
+      .catalog .ledger td small {
+        display: block;
+        font-size: 12.5px;
+        color: var(--faint);
+      }
+      .catalog .ledger td:nth-child(2) {
+        color: var(--ink);
+      }
+      .catalog .grp td {
+        background: #fafbf9;
+        font-size: 11px;
+        font-weight: 600;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        color: var(--faint);
+        padding-block: 7px;
+        text-align: left !important;
+      }
+      .rules {
+        padding: 18px 20px;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+      .rule {
+        background: #fafbf9;
+        border: 1px solid var(--line-soft);
+        border-radius: 8px;
+        padding: 10px 12px;
+        display: flex;
+        flex-direction: column;
+        font-size: 14px;
+      }
+      .rule small,
+      .tags small {
+        font-size: 12.5px;
+        color: var(--faint);
+      }
+      .rule .mono {
+        font-weight: 600;
+      }
+      .tags {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+        align-items: center;
+      }
+      .tags span {
+        height: 22px;
+        padding-inline: 8px;
+        border-radius: 6px;
+        font-size: 12px;
+        font-weight: 600;
+        background: #f8e5e2;
+        color: #9a3226;
+        display: inline-flex;
+        align-items: center;
+      }
+
+      /* Priser */
+      .plans {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 24px;
+      }
+      .plan {
+        padding: 28px;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+      .plan h3 {
+        font-size: 21px;
+        font-weight: 600;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 8px;
+      }
+      .plan .pfor {
+        color: var(--muted);
+      }
+      .price {
+        color: var(--muted);
+        margin-bottom: 4px;
+      }
+      .price .mono {
+        font-size: 36px;
+        font-weight: 600;
+        color: var(--ink);
+        margin-right: 4px;
+      }
+      .plan.featured {
+        border-color: var(--accent);
+        box-shadow: 0 0 0 1px var(--accent);
       }
 
       /* Steg */
@@ -546,7 +928,10 @@
         .hero-grid {
           gap: 40px;
         }
-        .steps {
+        .steps,
+        .flow,
+        .split,
+        .plans {
           grid-template-columns: minmax(0, 1fr);
         }
       }
@@ -560,8 +945,8 @@
         .hero {
           padding-block: 48px 64px;
         }
-        .versus,
-        .facts {
+        .facts,
+        .two {
           grid-template-columns: minmax(0, 1fr);
         }
         .cta {
@@ -569,6 +954,18 @@
         }
         .status {
           font-size: 13px;
+        }
+        .viz {
+          height: auto;
+          min-height: 240px;
+          padding: 20px 16px;
+        }
+        .stxt {
+          padding: 20px;
+        }
+        .ptypes > div {
+          grid-template-columns: 1fr;
+          gap: 2px;
         }
       }
     </style>
@@ -595,12 +992,13 @@
             <div class="eyebrow">För redovisningsbyråer</div>
             <h1>Ny kund får offert innan de hunnit mejla nästa byrå.</h1>
             <p class="lead" style="font-size: 19px">
-              LeadLedger ersätter kontaktformuläret på er webbplats. Kunden berättar om sitt företag, AI väljer tjänster ur er
-              prislista och offerten är klar på sekunder. Ni bestämmer om den går ut direkt eller efter ert godkännande.
+              LeadLedger ersätter kontaktformuläret på er webbplats. Kunden berättar om sitt företag, AI tar fram ett
+              svarsförslag ur er prislista på sekunder och ni godkänner det med ett tryck i mobilen. Sedan följer LeadLedger
+              upp tills kunden har svarat.
             </p>
             <div class="actions">
               <a class="btn btn-p" href="#kontakt">Bli pilotbyrå</a>
-              <a class="btn btn-s" href="#quicklead">Jämför med QuickLead</a>
+              <a class="btn btn-s" href="#sa-funkar-det">Se hur det fungerar</a>
             </div>
             <ul class="ticks">
               <li>
@@ -645,129 +1043,258 @@
         </div>
       </section>
 
-      <section class="band" id="quicklead">
+      <section class="band" id="sa-funkar-det">
         <div class="wrap stack" style="gap: 40px">
           <div class="stack section-head">
-            <div class="eyebrow">LeadLedger eller QuickLead</div>
-            <h2 class="h2">Det självklara alternativet till QuickLead för redovisningsbyråer</h2>
+            <div class="eyebrow">Så funkar det</div>
+            <h2 class="h2">Från förfrågan till ny kund i fyra steg</h2>
             <p class="lead">
-              QuickLead är byggt för jobb som prissätts ett uppdrag i taget. En redovisningsbyrå säljer något annat: ett
-              löpande uppdrag med månadsavgift, årsposter och engångsposter, där priset beror på bolagsform och volym.
-              LeadLedger är byggt för just det.
+              Kunden fyller i ett formulär, AI tar fram ett svarsförslag och ni godkänner det i mobilen. Sedan håller
+              LeadLedger kontakten tills kunden har svarat.
             </p>
           </div>
+          <ol class="flow">
+            <li class="card">
+              <div class="viz" aria-hidden="true">
+                <div class="mini">
+                  <div class="progress"><span class="on"></span><span class="on"></span><span></span></div>
+                  <div>
+                    <div class="ml">Bolagsform</div>
+                    <div class="seg"><span class="on">Aktiebolag</span><span>Enskild firma</span><span>Handelsbolag</span></div>
+                  </div>
+                  <div class="two">
+                    <div><div class="ml">Fakturor ni skickar/mån</div><div class="mf mono">25</div></div>
+                    <div><div class="ml">Anställda med lön</div><div class="mf mono">3</div></div>
+                  </div>
+                  <div class="mbtn">Fortsätt</div>
+                </div>
+              </div>
+              <div class="stxt">
+                <span class="sn">1</span>
+                <div>
+                  <h3>Kunden fyller i formuläret</h3>
+                  <p>
+                    Formuläret ersätter kontaktformuläret på er webbplats och frågar efter det som styr ert pris:
+                    bolagsform, verksamhet, antal fakturor och anställda. Det tar en minut, och kunden kan svara "vet inte".
+                  </p>
+                </div>
+              </div>
+            </li>
+            <li class="card">
+              <div class="viz" aria-hidden="true">
+                <div class="mini tight">
+                  <div class="mhead"><strong>Svarsförslag · Lindqvist Snickeri AB</strong><span class="pill">3 sek</span></div>
+                  <div class="intro">
+                    "Tack för att du hörde av dig, Erik. Med ett snickeri på tre personer och fakturorna i Fortnox passar vår
+                    digitala hantering er bra."
+                  </div>
+                  <div class="ln"><span>Löpande bokföring</span><span class="mono">2 400–2 900 kr</span></div>
+                  <div class="ln"><span>Momsdeklaration</span><span class="mono">300 kr</span></div>
+                  <div class="ln"><span>Lönehantering, 3 anställda</span><span class="mono">750 kr</span></div>
+                  <div class="ln sum"><span>Per månad</span><span class="mono">3 450–3 950 kr</span></div>
+                </div>
+              </div>
+              <div class="stxt">
+                <span class="sn">2</span>
+                <div>
+                  <h3>AI skriver ett svarsförslag</h3>
+                  <p>
+                    På några sekunder väljer AI rätt tjänster ur er prismodul och skriver en offert med en personlig
+                    inledning. Priset räknas alltid exakt enligt era regler. Är det en vanlig fråga skriver AI ett förslag
+                    på svar i stället.
+                  </p>
+                </div>
+              </div>
+            </li>
+            <li class="card">
+              <div class="viz dark" aria-hidden="true">
+                <div class="phone">
+                  <div class="notis">
+                    <svg width="32" height="32" viewBox="0 0 28 28">
+                      <rect width="28" height="28" rx="7" fill="#1E5E46"></rect>
+                      <path d="M8 9h12M8 13.5h8" stroke="#fff" stroke-width="2" stroke-linecap="round"></path>
+                      <path d="M8 18.5h12M8 21.5h12" stroke="#BFE0CB" stroke-width="1.5" stroke-linecap="round"></path>
+                    </svg>
+                    <div>
+                      <div class="ntop"><span>LEADLEDGER</span><span>nu</span></div>
+                      <strong>Ny offert att godkänna</strong>
+                      <div>Snickeri · 3 450–3 950 kr/mån</div>
+                    </div>
+                  </div>
+                  <div class="pbtns"><span>Ändra</span><span class="go">Godkänn och skicka</span></div>
+                </div>
+              </div>
+              <div class="stxt">
+                <span class="sn">3</span>
+                <div>
+                  <h3>Ni godkänner direkt i mobilappen</h3>
+                  <p>
+                    Ni får en notis i LeadLedger-appen för iPhone och Android. Läs igenom, ändra om ni vill och tryck
+                    Godkänn. Offerten går ut i ert namn från er egen e-post. Ni kan lika gärna godkänna på webben, eller
+                    låta enkla förfrågningar gå ut direkt.
+                  </p>
+                </div>
+              </div>
+            </li>
+            <li class="card">
+              <div class="viz" aria-hidden="true">
+                <ol class="mini tl">
+                  <li><span class="d"></span><div><strong>Offerten skickad</strong><div class="tm">29 sep</div></div></li>
+                  <li><span class="d"></span><div><strong>Kunden öppnade den</strong><div class="tm">30 sep · inget svar än</div></div></li>
+                  <li>
+                    <span class="d wait"></span>
+                    <div><strong>Uppföljning skriven av AI</strong><div class="tm">6 okt · <b>väntar på ert godkännande</b></div></div>
+                  </li>
+                  <li><span class="d next"></span><div><strong class="dim">Kunden accepterar och bokar samtal</strong><div class="tm">Ni får en notis direkt</div></div></li>
+                </ol>
+              </div>
+              <div class="stxt">
+                <span class="sn">4</span>
+                <div>
+                  <h3>LeadLedger följer upp automatiskt</h3>
+                  <p>
+                    Har kunden öppnat offerten men inte svarat skriver LeadLedger en uppföljning efter det antal dagar ni
+                    har valt. Ni godkänner den med ett tryck, och ser hela tiden vilka offerter som är skickade, öppnade och
+                    accepterade.
+                  </p>
+                </div>
+              </div>
+            </li>
+          </ol>
+        </div>
+      </section>
 
-          <div class="versus">
-            <div class="card theirs">
-              <h3>Byggt för ett uppdrag i taget</h3>
-              <ul class="checks">
-                <li>
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#8A948E" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M6 12h12"></path></svg>
-                  En förfrågan blir ett pris för ett jobb
-                </li>
-                <li>
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#8A948E" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M6 12h12"></path></svg>
-                  Passar branscher där varje uppdrag ser olika ut
-                </li>
-                <li>
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#8A948E" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M6 12h12"></path></svg>
-                  Bra när kunden köper något en gång
-                </li>
-              </ul>
+      <section id="prismodulen">
+        <div class="wrap split">
+          <div class="stack" style="gap: 24px">
+            <div class="stack">
+              <div class="eyebrow">Prismodulen</div>
+              <h2 class="h2">Er prislista, inbyggd</h2>
+              <p class="lead">
+                I prismodulen lägger ni in era tjänster och priser en gång. AI väljer bara rader härifrån och hittar aldrig
+                på ett pris. Varje krona i offerten räknas fram av era egna regler.
+              </p>
             </div>
-            <div class="card ours">
-              <h3>LeadLedger, byggt för redovisning</h3>
-              <ul class="checks">
-                <li>
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1E5E46" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12 5 5 9-10"></path></svg>
-                  Månads-, års- och engångsposter i samma offert
-                </li>
-                <li>
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1E5E46" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12 5 5 9-10"></path></svg>
-                  Pris per bolagsform, per anställd och i trappor efter antal transaktioner
-                </li>
-                <li>
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1E5E46" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12 5 5 9-10"></path></svg>
-                  Bokslut, årsredovisning och K10 räknas in där de hör hemma
-                </li>
-                <li>
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1E5E46" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12 5 5 9-10"></path></svg>
-                  Startmall med tjänster som svenska byråer säljer
-                </li>
-              </ul>
-            </div>
+            <dl class="ptypes">
+              <div><dt>Fast pris</dt><dd>Samma pris för alla, som momsdeklarationen.</dd></div>
+              <div><dt>Per enhet</dt><dd>Till exempel lön per anställd.</dd></div>
+              <div><dt>Trappa</dt><dd>Pris i nivåer efter antal transaktioner.</dd></div>
+              <div><dt>Per bolagsform</dt><dd>Olika pris för aktiebolag, enskild firma och handelsbolag.</dd></div>
+              <div><dt>Timpris</dt><dd>Uppskattad tid gånger ert timpris, för rådgivning och extraarbete.</dd></div>
+            </dl>
+            <ul class="checks">
+              <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1E5E46" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12 5 5 9-10"></path></svg>Börja från en startmall med prisförslag för svenska byråer</li>
+              <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1E5E46" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12 5 5 9-10"></path></svg>Månads-, års- och engångsposter, tillval och villkor</li>
+              <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1E5E46" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12 5 5 9-10"></path></svg>Ni sätter gränserna för när en offert får gå ut och när den ska granskas</li>
+              <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1E5E46" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12 5 5 9-10"></path></svg>Prova med påhittade kunder i testläget innan något visas utåt</li>
+            </ul>
           </div>
-
-          <div class="stack">
-            <h3 style="font-size: 18px; font-weight: 600">Så ser er prislista ut i LeadLedger</h3>
-            <div class="ledger">
-              <table>
-                <thead>
-                  <tr>
-                    <th scope="col">Tjänst</th>
-                    <th scope="col">Prissättning</th>
-                    <th scope="col">Exempel</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>Löpande bokföring</td>
-                    <td>Trappa efter transaktioner per månad</td>
-                    <td class="mono">0–50: 1 600 kr/mån</td>
-                  </tr>
-                  <tr>
-                    <td>Lönehantering</td>
-                    <td>Per anställd</td>
-                    <td class="mono">250 kr/mån</td>
-                  </tr>
-                  <tr>
-                    <td>Bokslut och årsredovisning</td>
-                    <td>Per bolagsform</td>
-                    <td class="mono">AB 8 500 kr/år</td>
-                  </tr>
-                  <tr>
-                    <td>K10-blankett</td>
-                    <td>Fast pris</td>
-                    <td class="mono">2 500 kr/år</td>
-                  </tr>
-                  <tr>
-                    <td>Rådgivning</td>
-                    <td>Timpris</td>
-                    <td class="mono">1 100 kr/tim</td>
-                  </tr>
-                </tbody>
-              </table>
+          <div class="stack" style="gap: 16px">
+            <div class="card catalog">
+              <div class="cat-head"><strong>Prismodulen · Tjänster</strong><span class="pill">Version 4 · publicerad</span></div>
+              <div class="ledger">
+                <table>
+                  <thead>
+                    <tr><th scope="col">Tjänst</th><th scope="col">Prissättning</th><th scope="col">Pris exkl. moms</th></tr>
+                  </thead>
+                  <tbody>
+                    <tr class="grp"><td colspan="3">Per månad</td></tr>
+                    <tr><td><strong>Löpande bokföring</strong><small>Kontering, avstämning, månadsrapport</small></td><td>Trappa · transaktioner</td><td class="mono">1 500–4 900 kr</td></tr>
+                    <tr><td><strong>Momsdeklaration</strong></td><td>Fast</td><td class="mono">300 kr</td></tr>
+                    <tr><td><strong>Lönehantering</strong><small>Lönebesked, AGI, semesterskuld</small></td><td>Per anställd</td><td class="mono">250 kr</td></tr>
+                    <tr><td><strong>Ekonomisk rådgivning</strong><small>Tillval</small></td><td>Timpris</td><td class="mono">1 100 kr/tim</td></tr>
+                    <tr class="grp"><td colspan="3">Per år</td></tr>
+                    <tr><td><strong>Bokslut och årsredovisning</strong></td><td>Per bolagsform</td><td class="mono">4 500–9 500 kr</td></tr>
+                    <tr><td><strong>K10-blankett</strong><small>Bara aktiebolag</small></td><td>Fast</td><td class="mono">1 500 kr</td></tr>
+                    <tr class="grp"><td colspan="3">En gång</td></tr>
+                    <tr><td><strong>Uppstart och överföring</strong></td><td>Fast</td><td class="mono">2 500 kr</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div class="card rules">
+              <strong>Regler för automatiska offerter</strong>
+              <div class="two">
+                <div class="rule"><small>Granska om summan är över</small><span class="mono">9 000 kr/mån</span></div>
+                <div class="rule"><small>Granska om AI är mindre säker än</small><span class="mono">70 %</span></div>
+              </div>
+              <div class="tags"><small>Granska alltid vid</small><span>företagsköp</span><span>eftersläpande bokföring</span><span>tvist med Skatteverket</span></div>
             </div>
             <p class="footnote">Exempelpriser exklusive moms. Ni lägger in era egna.</p>
           </div>
         </div>
       </section>
 
+      <section class="band" id="priser">
+        <div class="wrap stack" style="gap: 40px">
+          <div class="stack section-head">
+            <div class="eyebrow">Priser</div>
+            <h2 class="h2">Fast pris per månad. Ingen bindningstid.</h2>
+            <p class="lead">Alla planer har samma funktioner för offerter. Skillnaden är antalet användare, offerter och formulär.</p>
+          </div>
+          <div class="plans">
+            <div class="card plan">
+              <h3>Solo</h3>
+              <p class="pfor">För byrån med en konsult</p>
+              <p class="price"><span class="mono">990</span> kr/mån</p>
+              <ul class="checks">
+                <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1E5E46" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12 5 5 9-10"></path></svg>1 användare</li>
+                <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1E5E46" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12 5 5 9-10"></path></svg>30 offerter per månad</li>
+                <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1E5E46" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12 5 5 9-10"></path></svg>1 formulär</li>
+                <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1E5E46" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12 5 5 9-10"></path></svg>Appen och automatisk uppföljning</li>
+              </ul>
+            </div>
+            <div class="card plan featured">
+              <h3>Byrå <span class="pill">Vanligast</span></h3>
+              <p class="pfor">För byråer med flera konsulter</p>
+              <p class="price"><span class="mono">2 490</span> kr/mån</p>
+              <ul class="checks">
+                <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1E5E46" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12 5 5 9-10"></path></svg>5 användare</li>
+                <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1E5E46" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12 5 5 9-10"></path></svg>100 offerter per månad</li>
+                <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1E5E46" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12 5 5 9-10"></path></svg>Upp till 3 formulär</li>
+                <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1E5E46" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12 5 5 9-10"></path></svg>Utskick från er domän</li>
+              </ul>
+            </div>
+            <div class="card plan">
+              <h3>Flera kontor</h3>
+              <p class="pfor">För byråer på flera orter</p>
+              <p class="price"><span class="mono">4 990</span> kr/mån</p>
+              <ul class="checks">
+                <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1E5E46" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12 5 5 9-10"></path></svg>Obegränsat antal användare</li>
+                <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1E5E46" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12 5 5 9-10"></path></svg>300 offerter per månad</li>
+                <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1E5E46" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12 5 5 9-10"></path></svg>Upp till 10 formulär</li>
+                <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1E5E46" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12 5 5 9-10"></path></svg>En prismodul per kontor</li>
+              </ul>
+            </div>
+          </div>
+          <p class="footnote">
+            Alla priser exklusive moms. Betalar ni för ett år i taget får ni två månader gratis. Tar månadens offerter slut
+            kommer förfrågningarna in som vanligt och ni svarar för hand. Vi debiterar aldrig något extra automatiskt.
+          </p>
+        </div>
+      </section>
+
       <section>
         <div class="wrap stack" style="gap: 40px">
           <div class="stack section-head">
-            <div class="eyebrow">Så funkar det</div>
-            <h2 class="h2">AI läser förfrågan. Era regler sätter priset.</h2>
-            <p class="lead">
-              LeadLedger hittar aldrig på en tjänst eller ett pris. AI väljer bara ur er katalog, och priset räknas exakt
-              enligt det ni har lagt in. Svåra fall, som företagsköp eller eftersläpande bokföring, går till er i stället.
-            </p>
+            <div class="eyebrow">Kom igång</div>
+            <h2 class="h2">Igång på en eftermiddag</h2>
           </div>
           <ol class="steps">
             <li class="card">
               <span class="mono">01</span>
-              <h3>Lägg in era priser</h3>
-              <p>Börja från startmallen och justera tjänster och priser så att katalogen liknar er prislista.</p>
+              <h3>Ställ in allt på webben</h3>
+              <p>Välj en startmall, justera priserna i prismodulen och bestäm när uppföljningar ska skickas.</p>
             </li>
             <li class="card">
               <span class="mono">02</span>
               <h3>Byt kontaktformuläret</h3>
-              <p>Klistra in en rad kod där formuläret sitter i dag. Det tar emot både offertförfrågningar och vanliga frågor.</p>
+              <p>Klistra in en rad kod där formuläret sitter i dag. Vi hjälper till om ni vill.</p>
             </li>
             <li class="card">
               <span class="mono">03</span>
-              <h3>Godkänn eller låt gå</h3>
-              <p>Offerten går ut direkt, efter en stund eller när ni har tryckt godkänn i mobilen. Ni kan byta när ni vill.</p>
+              <h3>Ladda ner appen</h3>
+              <p>För iPhone och Android. Slå på notiser och godkänn er första offert.</p>
             </li>
           </ol>
         </div>
@@ -835,9 +1362,6 @@
         </span>
         <span>Offerter till nya kunder, inom sekunder. För svenska redovisningsbyråer.</span>
         <span>© 2026 LeadLedger · leadledger.se</span>
-      </div>
-      <div class="wrap" style="margin-top: 16px; font-size: 12px; color: #8a9a91">
-        QuickLead är ett varumärke som tillhör sin ägare. LeadLedger har ingen koppling till QuickLead.
       </div>
     </footer>
 
